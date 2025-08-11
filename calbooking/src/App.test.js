@@ -1,9 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it('renders Home heading', () => {
+  const { unmount } = render(<App />);
+  expect(
+    screen.getByRole('heading', { name: /home/i })
+  ).toBeInTheDocument();
+  unmount();
 });
